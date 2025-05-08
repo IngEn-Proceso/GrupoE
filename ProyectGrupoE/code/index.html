@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Compra de Cursos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Catálogo de Cursos</h1>
+      <a href="mis-cursos.html" class="btn-secundario">Mis cursos</a>
+    </header>
+
+    <div id="filtros">
+      <input type="text" id="buscar" placeholder="Buscar curso..." />
+      <label>
+        Precio máx:
+        <input type="number" id="filtro-precio" min="0" placeholder="Ej: 25" />
+      </label>
+    </div>
+   
+    <div id="cursos" class="grid"></div>
+
+    <div class="seccion-carrito">
+      <h2>🛒 Carrito de Compras</h2>
+      <ul id="carrito"></ul>
+      <p id="total"></p>
+      <button id="comprar">Confirmar Compra</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

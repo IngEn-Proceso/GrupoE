@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mis Cursos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎓 Mis Cursos Comprados</h1>
+      <a href="index.html" class="btn-secundario">Volver al catálogo</a>
+    </header>
+
+    <ul id="lista-mis-cursos"></ul>
+  </div>
+
+  <script>
+    const lista = document.getElementById("lista-mis-cursos");
+    const cursos = JSON.parse(localStorage.getItem("comprados")) || [];
+
+    if (cursos.length === 0) {
+      lista.innerHTML = "<p>No has comprado ningún curso aún.</p>";
+    } else {
+      cursos.forEach(curso => {
+        const li = document.createElement("li");
+        li.textContent = `${curso.nombre} - $${curso.precio} (Comprado el ${curso.fecha || "fecha desconocida"})`;
+        lista.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>

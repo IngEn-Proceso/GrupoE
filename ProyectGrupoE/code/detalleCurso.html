@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Detalle del Curso</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Detalle del Curso</h1>
+  <div id="curso-detalle" class="card"></div>
+
+  <script>
+    // Lista de cursos con descripción
+    const cursos = [
+      { id: 1, nombre: "Curso de JavaScript", precio: 20, nivel: "Intermedio", descripcion: "Aprende JS desde lo esencial hasta funciones avanzadas." },
+      { id: 2, nombre: "Curso de HTML y CSS", precio: 15, nivel: "Básico", descripcion: "Domina la creación de sitios web con HTML5 y CSS3." },
+      { id: 3, nombre: "Curso de React", precio: 30, nivel: "Avanzado", descripcion: "Construye interfaces modernas con React y hooks." },
+      { id: 4, nombre: "Curso de Node.js", precio: 25, nivel: "Intermedio", descripcion: "Crea APIs backend con Node.js y Express." }
+    ];
+
+    // Obtener el ID del curso desde la URL
+    const params = new URLSearchParams(window.location.search);
+    const idCurso = parseInt(params.get("id"));
+
+    // Buscar el curso por su ID
+    const curso = cursos.find(c => c.id === idCurso);
+
+    const contenedor = document.getElementById("curso-detalle");
+
+    // Mostrar información del curso
+    if (curso) {
+      contenedor.innerHTML = `
+        <h2>${curso.nombre}</h2>
+        <p><strong>Precio:</strong> $${curso.precio}</p>
+        <p><strong>Nivel:</strong> ${curso.nivel}</p>
+        <p>${curso.descripcion}</p>
+        <button onclick="agregarAlCarrito(${curso.id})">Agregar al carrito</button>
+      `;
+    } else {
+      // Mostrar mensaje si no se encuentra el curso
+      contenedor.textContent = "Curso no encontrado.";
+    }
+
+    // Agregar curso al carrito
+    function agregarAlCarrito(id) {
+      const curso = cursos.find(c => c.id === id);
+      const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+      if (!carrito.some(c => c.id === id)) {
+        carrito.push(curso);
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+        alert("Curso agregado al carrito.");
+      } else {
+        alert("Este curso ya está en el carrito.");
+      }
+    }
+  </script>
+</body>
+</html>
